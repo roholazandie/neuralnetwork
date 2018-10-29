@@ -56,7 +56,7 @@ def scatter3d_plot(x, y, z, names, colors=None, output_file=None):
     offpy(fig, filename=output_file+".html", auto_open=True, show_link=False)
 
 
-def plot_decision_boundary(pred_func, X, y):
+def plot_decision_boundary(pred_func, X, y, outputfile):
     # Set min and max values and give it some padding
     x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
     y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
@@ -87,8 +87,17 @@ def plot_decision_boundary(pred_func, X, y):
                                     )
                         )
 
-    fig = go.Figure(data=[trace1, trace2])
-    offpy(fig, filename="ddd.html", auto_open=True, show_link=False)
+    fig = go.Figure(data=[trace1,  trace2])
+    offpy(fig, filename=outputfile+".html", auto_open=True, show_link=False)
+
+
+
+def draw_plane():
+    x, y, z = [0, 1, 2], [0, 0, 1], [0, 2, 0]
+
+    trace = go.Mesh3d(x=x, y=y, z=z, color='#FFB6C1', opacity=0.50)
+    figure1 = dict(data=[trace])
+    offpy(figure1, filename="plane.html", auto_open=True, show_link=False)
 
 
 def animate_decision_boundary(animation_data, X, y):
@@ -211,5 +220,6 @@ def show_image(image_url):
     webbrowser.open(out_file_url, new=new)
 
 if __name__ == "__main__":
-    show_image(1)
+    #show_image(1)
+    draw_plane()
 
