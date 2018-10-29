@@ -10,20 +10,22 @@ class NeuralNetworkDatasets():
 
     def select_dataset(self, dataset_name="two_moons"):
         np.random.seed(0)
-        X, Y, visualizable = [], [], False
+        X, Y = [], []
         if dataset_name == "two_moons":
             X, Y = datasets.make_moons(200, noise=0.25)
-            visualizable = True
+
         elif dataset_name == "iris":
             X, Y = datasets.load_iris(return_X_y=True)
             Y = [0 if y == 0 else 1 for y in Y]
-            visualizable = False
+
         elif dataset_name == "wine":
             X, Y = datasets.load_wine(return_X_y=True)
             Y = [0 if y != 0 else 1 for y in Y]
-            visualizable = False
 
-        return X, Y, visualizable
+        elif dataset_name == "breast_cancer":
+            X, Y = datasets.load_breast_cancer(return_X_y=True)
+
+        return X, Y,
 
     def encode_dataset(self, X, Y):
         Y_one_hot = get_one_hot(Y)
