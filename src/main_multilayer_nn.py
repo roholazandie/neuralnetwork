@@ -7,7 +7,7 @@ from src.neural_network_datasets import NeuralNetworkDatasets
 from visualization.plotlyvisualize import plot_decision_boundary, scatter3d_plot
 from sklearn.preprocessing import scale
 
-dataset_name = "breast_cancer"
+dataset_name = "iris"
 dim_reduction = True
 
 neural_network_datasets = NeuralNetworkDatasets()
