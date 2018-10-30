@@ -9,11 +9,14 @@ import numpy as np
 from visualization.plotlyvisualize import plot_decision_boundary
 
 dataset_name = "breast_cancer"
+dim_reduction = True
 
 neural_network_datasets = NeuralNetworkDatasets()
 X, Y = neural_network_datasets.select_dataset(dataset_name)
 n_dimension = np.shape(X)[1]
-if n_dimension> 2:
+
+
+if dim_reduction and n_dimension > 2:
     print("more than 2d case")
     dimensionality_reduction = DimensionalityReduction(method_name="svd")
     X = scale(X, axis=0)
@@ -35,5 +38,6 @@ final_accuracy = simple_neural_network.stochastic_gradient_descent(training_data
                                                                    eta=0.8,
                                                                    lambda_=0)
 
-plot_decision_boundary(lambda x: simple_neural_network.predict(x), X, Y,
-                       outputfile="../results/three_layer_decision_boundary_simple"+dataset_name)
+if n_dimension <= 2 or dim_reduction:
+    plot_decision_boundary(lambda x: simple_neural_network.predict(x), X, Y,
+                           outputfile="../results/three_layer_decision_boundary_simple"+dataset_name)
