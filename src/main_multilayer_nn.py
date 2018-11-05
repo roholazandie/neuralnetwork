@@ -7,8 +7,8 @@ from src.neural_network_datasets import NeuralNetworkDatasets
 from visualization.plotlyvisualize import plot_decision_boundary, scatter3d_plot
 from sklearn.preprocessing import scale
 
-dataset_name = "iris"
-dim_reduction = True
+dataset_name = "two_moons"
+dim_reduction = False
 
 neural_network_datasets = NeuralNetworkDatasets()
 X, Y = neural_network_datasets.select_dataset(dataset_name)
@@ -25,9 +25,9 @@ all_data = neural_network_datasets.encode_dataset(X, Y)
 training_data, evaluation_data = neural_network_datasets.split_dataset(all_data, ratio=0.75)
 
 #multilayer neural network
-multilayer_neural_netowrk = MultiLayerNeuralNetwork(sizes=[n_dimension, 20, 10, 2],
+multilayer_neural_netowrk = MultiLayerNeuralNetwork(sizes=[n_dimension, 5, 2],
                                                     loss_function=L2Loss,
-                                                    activation_function_name="sigmoid",
+                                                    activation_function_name="tanh",
                                                     n_epochs=100)
 final_accuracy = multilayer_neural_netowrk.stochastic_gradient_descent(training_data=training_data,
                                                                                        evaluation_data=evaluation_data,

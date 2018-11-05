@@ -19,7 +19,7 @@ class MultiLayerNeuralNetwork(NeuralNetwork):
         self.weights = []
         self.n_epochs = n_epochs
 
-        self.initialize_weights(method="normal")
+        self.initialize_weights(method="xavier")
 
     @property
     def grad_b(self):

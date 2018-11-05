@@ -32,7 +32,10 @@ var/
 results/*
 libs/stanford-corenlp-full-2018-02-27/*
 bots/ryan/password.txt
-
+src/logs/*
+src/logs_three_layer_centered/*
+src/logs_cnn_centered/*
+data/*
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
