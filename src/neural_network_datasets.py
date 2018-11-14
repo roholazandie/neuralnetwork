@@ -76,17 +76,15 @@ class MNISTDataset():
 
         return centered_validation_data, centered_validation_labels
 
-
-    # def scale(self, dataset):
-    #     scaled_dataset = scale(dataset, axis=0)
-    #     return scaled_dataset
-
     def one_hot_encode_dataset(self, Y):
         Y_one_hot = get_one_hot(Y)
         return Y_one_hot
 
     def reshape_dataset(self, dataset):
         return dataset.reshape(np.shape(dataset)[0], 28, 28, 1).astype('float32')
+
+
+
 
 
 

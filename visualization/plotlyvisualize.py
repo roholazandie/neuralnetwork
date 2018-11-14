@@ -17,6 +17,7 @@ def scatter_plot(x, y, colors,  names, output_file):
         marker=dict(
             size=5,
             color=colors,
+            colorscale='Jet',
             line=dict(
                 width=1,
                 color='rgb(0, 0, 0)'
@@ -30,27 +31,51 @@ def scatter_plot(x, y, colors,  names, output_file):
     offpy(fig, filename=output_file+".html", auto_open=True, show_link=False)
 
 
+
 def scatter3d_plot(x, y, z, names, colors=None, output_file=None):
     if colors is None:
         colors = 'rgba(10, 10, 10, 0.9)'
+    import matplotlib.pyplot as plt
+    jet = plt.get_cmap('Blues')
 
-    trace = go.Scatter3d(
-        x=x,
-        y=y,
-        z=z,
-        text=names,
-        mode='markers',
-        marker=dict(
-            size=3,
-            color = colors,
-            line=dict(
-                color='rgba(217, 217, 217, 0.14)',
-                width=0.5
-            ),
-            opacity=1
+    colors = ["rgb(0,0,128)",
+              "rgb(0,128,128)",
+              "rgb(128,0,128)",
+              "rgb(128,128,128)",
+              "rgb(255,0,0)",
+              "rgb(0,255,128)",
+              "rgb(255,0,128)",
+              "rgb(255,255,128)",
+              "rgb(255,128,128)",
+              "rgb(128,255,255)"]
+
+    data = []
+    unique_names = np.unique(names)
+    for i, name in enumerate(unique_names):
+        indices = names==name
+
+        trace = go.Scatter3d(
+            x=x[indices],
+            y=y[indices],
+            z=z[indices],
+            text=str(name),
+            mode='markers',
+            name = "Digit "+str(i),
+            marker=dict(
+                size=4,
+                color = colors[i],
+                #colorscale='Jet',
+                line=dict(
+                    color='rgba(217, 217, 217, 0.14)',
+                    width=0.2
+                ),
+                opacity=1
+            )
         )
-    )
-    data = [trace]
+
+        data.append(trace)
+
+
     fig = go.Figure(data=data)
 
     offpy(fig, filename=output_file+".html", auto_open=True, show_link=False)
